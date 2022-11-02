@@ -9,31 +9,31 @@ const iconStyle = (Icon) => <Icon size="3rem" color="#0f0f0f" />;
 
 export const featuresData = [
 	{
-		name: 'Best Security',
-		description: 'We offer the best data security to our clients, which makes us stand out',
+		name: 'Privacidad y seguridad',
+		description: 'Ofrecemos cursos personales, en un ambiente seguro, donde podras evacuar todas tus dudas.',
 		icon: iconStyle(BsFillShieldLockFill),
 		imgClass: 'one',
 	},
 	{
-		name: 'Ease of Use',
+		name: 'Facilidad de uso',
 		description: 'Our system is easy to use and integrate',
 		icon: iconStyle(IoIosOptions),
 		imgClass: 'two',
 	},
 	{
-		name: 'Maintenance',
+		name: 'Actualizacion de cursos',
 		description: 'Our code is written in highest standards, which makes it highly sustainable',
 		icon: iconStyle(GrHostMaintenance),
 		imgClass: 'three',
 	},
 	{
-		name: '24/7 Support',
+		name: 'Soporte 24/7',
 		description: 'Our team is available at all times in case you need us',
 		icon: iconStyle(BiSupport),
 		imgClass: 'four',
 	},
 	{
-		name: 'Price',
+		name: 'Precios justos',
 		description: 'We offer the highest value/cost ratio',
 		icon: iconStyle(BiDollar),
 		imgClass: 'five',

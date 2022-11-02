@@ -2,11 +2,11 @@ export const heroOne = {
 	reverse: true,
 	inverse: true,
 	topLine: {
-		text: 'Founded in 2022',
+		text: 'Fundada en 2022',
 	},
-	headline: "We've been in business for 9 years",
-	description: 'We have designed and implemented the best cloud security solutions',
-	buttonLabel: 'Find More',
+	headline: "Conocemos el negocio desde hace más de 9 años",
+	description: 'Desarrollamos y diseñamos los mejores cursos para potenciar tus habilidades',
+	buttonLabel: 'Saber más',
 	imgStart: 'start',
 	img: './assets/svg/Deal.svg',
 	start: 'true',
@@ -16,11 +16,11 @@ export const heroTwo = {
 	reverse: false,
 	inverse: false,
 	topLine: {
-		text: 'Designed & Developed',
+		text: 'Diseñado & Desarrollado',
 	},
-	headline: 'The best practices',
-	description: 'Our clients have had the best experience working with us',
-	buttonLabel: 'View Project',
+	headline: 'Las mejores practicas',
+	description: 'Buscamos que nuestros clientes tengan la mejor experiencia al tomar un curso con nostros.',
+	buttonLabel: 'Ver el Projecto',
 
 	linkTo: '/more',
 	imgStart: 'start',
@@ -32,12 +32,15 @@ export const heroThree = {
 	reverse: true,
 	inverse: true,
 	topLine: {
-		text: 'Highly reputed brand',
+		text: 'Una marca de alto prestigio',
 	},
-	headline: 'Why us? ',
+	headline: '¿Por que nosotros? ',
 	description:
-		'Our 9 year experience have allowed us to use the most innovative technologies and methodologies',
-	buttonLabel: 'View Project',
+		'¿Será bueno el curso? ¿El profesor sabrá de lo que habla?\n '+
+		'La primera prueba, es esta academia. Creada desde cero por nosotros utilizando lo mismo que enseñamos en nuestros cursos.\n'+
+		'La segunda, es todo el contenido gratuito que compartimos en nuestras redes sociales.'
+		,
+	buttonLabel: 'Ver el Projecto',
 
 	linkTo: '/download',
 	imgStart: '',
