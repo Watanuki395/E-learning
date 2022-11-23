@@ -12,13 +12,13 @@ import {
 	NavLinks,
 	NavItem,
 } from './NavbarStyles.js';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { data } from '../../data/NavbarData';
 
 const Navbar = () => {
 	const [show, setShow] = useState(false);
 
-	let history = useHistory();
+	let history = useNavigate();
 	let location = useLocation();
 
 	const handleClick = () => {

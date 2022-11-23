@@ -1,26 +1,44 @@
 import React from 'react';
 import GlobalStyle from './globalStyles';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRote";
 
 //Pages
 import Home from './pages/Home';
 import SignUp from './pages/SignupPage';
 import Pricing from './pages/PricingPage';
 import Footer from './components/Footer/Footer';
+import { Login } from "./components/Login/Login";
+import { Register } from "./components/Register/Register";
+import { Admin } from "./components/Admin/Admin";
+
+
 
 function App() {
 	return (
-		<Router>
-			<GlobalStyle />
-			<Navbar />
-			<Switch>
-				<Route path="/" exact component={Home} />
-				<Route path="/signup" exact component={SignUp} />
-				<Route path="/pricing" exact component={Pricing} />
-			</Switch>
-			<Footer />
-		</Router>
+		<AuthProvider>
+		<GlobalStyle />
+		<Navbar />
+
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/signup" element={<SignUp />} />
+			<Route path="/pricing" element={<Pricing />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/register" element={<Register />} />
+			<Route
+			path="/superadmin"
+			element={
+				<ProtectedRoute>
+				<Admin />
+				</ProtectedRoute>
+			}
+			/>
+		</Routes>
+		<Footer />
+		</AuthProvider>
 	);
 }
 
