@@ -1,77 +1,212 @@
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import ContainerMUI from "@mui/material/Container";
+import { Container, Section } from "../../globalStyles";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { Alert } from "../Alert/Alert";
-export function Register() {
+import * as Yup from "yup";
+import { Formik, Form, Field } from "formik";
+import { CustumAlert } from "../Alert/Alert";
+
+const initialValues = {
+  fname: "",
+  lname: "",
+  email: "",
+  password: "",
+  password2: "",
+};
+
+const validationSchema = Yup.object().shape({
+  fname: Yup.string()
+    .min(5, `Mínimo 5 caracteres`)
+    .max(25, `Máximo 25 caracteres`)
+    .required("Campo Requerido"),
+  lname: Yup.string()
+    .min(5, `Mínimo 5 caracteres`)
+    .max(25, `Máximo 25 caracteres`)
+    .required("Campo Requerido"),
+  email: Yup.string()
+    .required("Campo Requerido")
+    .email("Correo Electrónico Inválido")
+    .max(255, `Máximo 255 caracteres`),
+  password: Yup.string()
+    .required("Campo Requerido")
+    .min(8, `Mínimo 8 caracteres`),
+  password2: Yup.string()
+    .required("Campo Requerido")
+    .min(8, `Mínimo  8 caracteres`)
+    .oneOf([Yup.ref("password"), null], "Las contraseñas deben ser iguales"),
+});
+
+export const Register = () => {
+
+  const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
+
+  const ERROR_MSG_ACCOUNT_EXISTS = `
+    An account with this E-Mail address already exists.
+    Try to login with this account instead. If you think the
+    account is already used from one of the social logins, try
+    to sign in with one of them. Afterward, associate your accounts
+    on your personal account page.
+  `;
+
   const { signup } = useAuth();
 
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  const handleSubmit = async (vals) => {
+    setError(false);
+    const data = {
+      fname: vals.fname,
+      lname: vals.lname,
+    };
     try {
-      await signup(user.email, user.password);
-      navigate("/");
+      if (vals.email && vals.password) {
+        await signup(vals.email, vals.password, data)
+        .then(()=>{
+          setErrorMsg("");
+          setError(false);
+        })
+        .catch((error)=>{
+          if(error.code = ERROR_CODE_ACCOUNT_EXISTS){
+            setErrorMsg(ERROR_MSG_ACCOUNT_EXISTS);
+            setError(true);
+          }
+        });
+        
+        } 
     } catch (error) {
-      setError(error.message);
+      setErrorMsg(error);
+      setError(true);
     }
   };
 
   return (
-    <div className="w-full max-w-xs m-auto text-black">
-      {error && <Alert message={error} />}
-
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-6 mb-4"
-      >
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="youremail@company.tld"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="*************"
-          />
-        </div>
-
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Register
-        </button>
-      </form>
-      <p className="my-4 text-sm flex justify-between px-3">
-        Already have an Account?
-        <Link to="/login" className="text-blue-700 hover:text-blue-900">
-          Login
-        </Link>
-      </p>
-    </div>
+    <Section smPadding="50px 10px" inverse id="about" margin="auto">
+      <Container>
+      {error && <CustumAlert message={errorMsg} title={"Error"} severity={"error"}/>}
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(values) => handleSubmit(values)}
+        >
+          {({errors, isValid, touched, dirty}) => (
+            <Form>
+              <ContainerMUI component="main" maxWidth="sm">
+                <CssBaseline />
+                <Box
+                  sx={{
+                    marginTop: 8,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                    <LockOutlinedIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    Sign up
+                  </Typography>
+                  <Box  sx={{ mt: 3 }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <Field
+                          name="fname"
+                          fullWidth
+                          label="Nombre"
+                          autoFocus
+                          as={TextField}
+                          error={Boolean(errors.fname) && Boolean(touched.fname)}
+                          helperText={Boolean(touched.fname) && errors.fname}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <Field
+                          name="lname"
+                          fullWidth
+                          label="Apellidos"
+                          as={TextField}
+                          error={Boolean(errors.lname) && Boolean(touched.lname)}
+                          helperText={Boolean(touched.lname) && errors.lname}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Field
+                          fullWidth
+                          name="email"
+                          label="Correo Electronico"
+                          type="email"
+                          as={TextField}
+                          error={Boolean(errors.email) && Boolean(touched.email)}
+                          helperText={Boolean(touched.email) && errors.email}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Field
+                          fullWidth
+                          name="password"
+                          label="Contraseña"
+                          type="password"
+                          as={TextField}
+                          error={Boolean(errors.password) && Boolean(touched.password)}
+                          helperText={Boolean(touched.password) && errors.password}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Field
+                          
+                          fullWidth
+                          name="password2"
+                          label="Confirme la Contraseña"
+                          type="password"
+                          as={TextField}
+                          error={Boolean(errors.password2) && Boolean(touched.password2)}
+                          helperText={Boolean(touched.password2) && errors.password2}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                    >
+                      Registrarme
+                    </Button>
+                    <Grid container justifyContent="flex-end">
+                      <Grid item>
+                        <Link
+                          component="button"
+                          variant="body2"
+                          onClick={() => {
+                            navigate("/login");
+                          }}
+                        >
+                          ¿Ya tienes una cuenta? Inicia Sesion.
+                        </Link>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Box>
+              </ContainerMUI>
+            </Form>
+          )}
+        </Formik>
+      </Container>
+    </Section>
   );
-}
+};

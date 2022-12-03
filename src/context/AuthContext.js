@@ -4,11 +4,19 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendEmailVerification,
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 
 const authContext = createContext();
 
@@ -23,8 +31,13 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [persist, setPersist] = useState(JSON.parse(localStorage.getItem("persist")) || false);
 
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email, password, data) => {
+    await createUserWithEmailAndPassword(auth, email, password);
+    await sendEmailVerification(auth.currentUser);
+    await setDoc(doc(db, "users", auth.currentUser.uid), {
+        ...data,
+        timeStamp: serverTimestamp(),
+      });
   };
 
   const login = (email, password) => {
