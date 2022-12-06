@@ -9,6 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import LinearProgress from '@mui/material/LinearProgress';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import ContainerMUI from "@mui/material/Container";
@@ -54,11 +55,7 @@ export const Register = () => {
   const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
 
   const ERROR_MSG_ACCOUNT_EXISTS = `
-    An account with this E-Mail address already exists.
-    Try to login with this account instead. If you think the
-    account is already used from one of the social logins, try
-    to sign in with one of them. Afterward, associate your accounts
-    on your personal account page.
+    Una cuenta con este correo electronico ya existe.
   `;
 
   const { signup } = useAuth();
@@ -79,6 +76,7 @@ export const Register = () => {
         .then(()=>{
           setErrorMsg("");
           setError(false);
+          navigate("/superadmin");
         })
         .catch((error)=>{
           if(error.code = ERROR_CODE_ACCOUNT_EXISTS){
@@ -97,13 +95,15 @@ export const Register = () => {
   return (
     <Section smPadding="50px 10px" inverse id="about" margin="auto">
       <Container>
-      {error && <CustumAlert message={errorMsg} title={"Error"} severity={"error"}/>}
+        {error && (
+          <CustumAlert message={errorMsg} title={"Error"} severity={"error"} />
+        )}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values) => handleSubmit(values)}
         >
-          {({errors, isValid, touched, dirty}) => (
+          {({ errors, touched, isSubmitting }) => (
             <Form>
               <ContainerMUI component="main" maxWidth="sm">
                 <CssBaseline />
@@ -121,16 +121,22 @@ export const Register = () => {
                   <Typography component="h1" variant="h5">
                     Sign up
                   </Typography>
-                  <Box  sx={{ mt: 3 }}>
+                  {isSubmitting && (
+                    <Box sx={{ width: "100%" }}>
+                      <LinearProgress />
+                    </Box>
+                  )}
+                  <Box sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6}>
                         <Field
                           name="fname"
                           fullWidth
                           label="Nombre"
-                          autoFocus
                           as={TextField}
-                          error={Boolean(errors.fname) && Boolean(touched.fname)}
+                          error={
+                            Boolean(errors.fname) && Boolean(touched.fname)
+                          }
                           helperText={Boolean(touched.fname) && errors.fname}
                         />
                       </Grid>
@@ -140,7 +146,9 @@ export const Register = () => {
                           fullWidth
                           label="Apellidos"
                           as={TextField}
-                          error={Boolean(errors.lname) && Boolean(touched.lname)}
+                          error={
+                            Boolean(errors.lname) && Boolean(touched.lname)
+                          }
                           helperText={Boolean(touched.lname) && errors.lname}
                         />
                       </Grid>
@@ -151,7 +159,9 @@ export const Register = () => {
                           label="Correo Electronico"
                           type="email"
                           as={TextField}
-                          error={Boolean(errors.email) && Boolean(touched.email)}
+                          error={
+                            Boolean(errors.email) && Boolean(touched.email)
+                          }
                           helperText={Boolean(touched.email) && errors.email}
                         />
                       </Grid>
@@ -162,20 +172,29 @@ export const Register = () => {
                           label="Contraseña"
                           type="password"
                           as={TextField}
-                          error={Boolean(errors.password) && Boolean(touched.password)}
-                          helperText={Boolean(touched.password) && errors.password}
+                          error={
+                            Boolean(errors.password) &&
+                            Boolean(touched.password)
+                          }
+                          helperText={
+                            Boolean(touched.password) && errors.password
+                          }
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <Field
-                          
                           fullWidth
                           name="password2"
                           label="Confirme la Contraseña"
                           type="password"
                           as={TextField}
-                          error={Boolean(errors.password2) && Boolean(touched.password2)}
-                          helperText={Boolean(touched.password2) && errors.password2}
+                          error={
+                            Boolean(errors.password2) &&
+                            Boolean(touched.password2)
+                          }
+                          helperText={
+                            Boolean(touched.password2) && errors.password2
+                          }
                         />
                       </Grid>
                     </Grid>

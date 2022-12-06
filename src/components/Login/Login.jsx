@@ -1,99 +1,98 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { CustumAlert } from "../Alert/Alert";
-import { Container, Section } from "../../globalStyles";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import GoogleIcon from '@mui/icons-material/Google';
+    import { useState, useEffect } from "react";
+    import { useNavigate } from "react-router-dom";
+    import { useAuth } from "../../context/AuthContext";
+    import { CustumAlert } from "../Alert/Alert";
+    import { Container, Section } from "../../globalStyles";
+    import Avatar from "@mui/material/Avatar";
+    import Button from "@mui/material/Button";
+    import CssBaseline from "@mui/material/CssBaseline";
+    import TextField from "@mui/material/TextField";
+    import Link from "@mui/material/Link";
+    import Paper from "@mui/material/Paper";
+    import Box from "@mui/material/Box";
+    import LinearProgress from '@mui/material/LinearProgress';
+    import Grid from "@mui/material/Grid";
+    import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+    import Typography from "@mui/material/Typography";
+    import * as Yup from "yup";
+    import { Formik, Form, Field } from "formik";
 
-import {
-    LoginWrapper
-    } from "./styles";
+    const initialValues = {
+    email: "",
+    password: "",
+    };
 
-export function Login() {
-
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
+    const validationSchema = Yup.object().shape({
+    email: Yup.string()
+        .required("Campo Requerido")
+        .email("Correo Electrónico Inválido")
+        .max(255, `Máximo 255 caracteres`),
+    password: Yup.string()
+        .required("Campo Requerido")
+        .min(8, `Mínimo 8 caracteres`),
     });
 
-    const { login, loginWithGoogle, resetPassword, persist, setPersist } = useAuth();
+    export function Login() {
+        const ERROR_CODE_WRONG_PASS = "auth/wrong-password";
+
+        const ERROR_MSG_WRONG_PASS = `Usuario y/o contraseña no validos`;
+
+    const { login, resetPassword, persist, setPersist } =
+        useAuth();
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-
-    const togglePersist = () => {
-        setPersist((prev) => !prev);
-    };
 
     useEffect(() => {
         localStorage.setItem("persist", persist);
     }, [persist]);
 
-
-
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const handleSubmit = async (vals) => {
+        setError(false);
         try {
-            if (user.email && user.password){
-                await login(user.email, user.password);
+        if (vals.email && vals.password) {
+            await login(vals.email, vals.password).then(()=>{
+                setErrorMsg("");
+                setError(false);
                 navigate("/superadmin");
-                setErrorMsg("")
-                setError(false)
-            }else{
-                setError(true)
-                setErrorMsg("El usuario y la contraseña son requeridos");
+            }).catch((error)=>{
+                console.log(error);
+                    if(error.code = ERROR_CODE_WRONG_PASS){
+                        setErrorMsg(ERROR_MSG_WRONG_PASS);
+                        setError(true);
+                    }
+                })
             }
         } catch (err) {
-            setError(true)
-            setErrorMsg("Usuario y/o contraseña no validos");
-            console.log(err)
+        setError(true);
+        setErrorMsg(err);
+        console.log(err);
         }
     };
 
-    const handleChange = ({ target: { value, name } }) =>{
-        setUser({ ...user, [name]: value });
-        setError(false)
-        setErrorMsg("");
-    }
-        
 
-    // const handleGoogleSignin = async () => {
-    //     try {
-    //     await loginWithGoogle();
-    //     navigate("/superadmin");
-    //     } catch (error) {
-    //     setErrorMsg('Usuario y/o contraseña no validos');
-    //     }
-    // };
-
-    const handleResetPassword = async (e) => {
-        e.preventDefault();
-        if (!user.email) return setErrorMsg("Write an email to reset password");
+    const handleResetPassword = async (vals) => {
+        if (!vals.email) return setErrorMsg("Write an email to reset password");
         try {
-        await resetPassword(user.email);
+        await resetPassword(vals.email);
         setErrorMsg("We sent you an email. Check your inbox");
         } catch (error) {
-            setErrorMsg(error.message);
+        setErrorMsg(error.message);
         }
     };
 
     return (
-        <Section smPadding="50px 10px"  inverse id="about" margin="auto">
+        <Section smPadding="50px 10px" inverse id="about" margin="auto">
         <Container>
-                <Grid container component="main" sx={{ height: '100vh' }}>
+            <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={(values) => handleSubmit(values)}
+            >
+            {({ errors, touched, isSubmitting }) => (
+                <Form>
+                <Grid container component="main" sx={{ height: "100vh" }}>
                     <CssBaseline />
                     <Grid
                     item
@@ -101,100 +100,115 @@ export function Login() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://picsum.photos/400/600)',
-                        backgroundRepeat: 'no-repeat',
+                        backgroundImage: "url(https://picsum.photos/400/600)",
+                        backgroundRepeat: "no-repeat",
                         backgroundColor: (t) =>
-                        t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
+                        t.palette.mode === "light"
+                            ? t.palette.grey[50]
+                            : t.palette.grey[900],
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
                     }}
                     />
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <Grid
+                    item
+                    xs={12}
+                    sm={8}
+                    md={5}
+                    component={Paper}
+                    elevation={6}
+                    square
+                    >
                     <Box
                         sx={{
                         my: 8,
                         mx: 4,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                         <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                         Iniciar Sesion
                         </Typography>
-                        <Box component="form" noValidate  sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            onChange={handleChange}
-                            error={error}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={handleChange}
-                            error={error}
-                        />
-                        {error && <CustumAlert message={errorMsg} title={"Error"} severity={"error"}/>}
-                        {/* <FormControlLabel
-                            control={<Checkbox value="remember" 
-                            onChange={togglePersist} 
-                            checked={persist}
-                            color="primary" />}
-                            label="Recordarme"
-                        /> */}
+                        {isSubmitting && (
+                    <Box sx={{ width: "100%" }}>
+                      <LinearProgress />
+                    </Box>
+                  )}
+                        <Box sx={{ mt: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                            <Field
+                                fullWidth
+                                name="email"
+                                label="Correo Electronico"
+                                type="email"
+                                as={TextField}
+                                error={
+                                Boolean(errors.email) && Boolean(touched.email)
+                                }
+                                helperText={Boolean(touched.email) && errors.email}
+                            />
+                            </Grid>
+                            <Grid item xs={12}>
+                            <Field
+                                fullWidth
+                                name="password"
+                                label="Contraseña"
+                                type="password"
+                                as={TextField}
+                                error={
+                                Boolean(errors.password) &&
+                                Boolean(touched.password)
+                                }
+                                helperText={
+                                Boolean(touched.password) && errors.password
+                                }
+                            />
+                            </Grid>
+                            <Grid item xs={12}>
+                            {error && (
+                            <CustumAlert
+                            message={errorMsg}
+                            title={"Error"}
+                            severity={"error"}
+                            />
+                            )}
+                        </Grid>
+                        </Grid>
+                        
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={(values)=>{handleSubmit(values)}}
                         >
                             Iniciar
                         </Button>
-                        {/* <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                            onClick={handleGoogleSignin}
-                            startIcon={<GoogleIcon />}
-                        >
-                            Iniciar con Google
-                        </Button> */}
                         <Grid container>
                             <Grid item xs>
-                            <Link 
+                            <Link
                                 component="button"
                                 variant="body2"
                                 onClick={() => {
-                                    navigate("/forgotpass");
-                                }}>
+                                navigate("/forgotpass");
+                                }}
+                            >
                                 ¿Olvide mi contraseña?
                             </Link>
                             </Grid>
                             <Grid item>
-                            <Link 
+                            <Link
                                 component="button"
                                 variant="body2"
                                 onClick={() => {
-                                    navigate("/register");
-                                }}>
+                                navigate("/register");
+                                }}
+                            >
                                 ¿No tienes una cuenta? Registrate.
                             </Link>
                             </Grid>
@@ -203,7 +217,10 @@ export function Login() {
                     </Box>
                     </Grid>
                 </Grid>
+                </Form>
+            )}
+            </Formik>
         </Container>
         </Section>
     );
-}
+    }
