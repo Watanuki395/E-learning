@@ -1,15 +1,30 @@
-export const data = [
+export const navlogout = [
 	{
-		to: '/',
-		text: 'Sobre Nostros',
-		id: 'about',
+		to: "/",
+		text: "Sobre Nostros",
+		id: "about",
 	},
 	{
-		to: '/pricing',
-		text: 'Precios',
+		to: "/pricing",
+		text: "Precios",
+		id: "pricing",
 	},
 	{
-		to: '/signup',
-		text: 'Contactatanos',
+		to: "/login",
+		text: "Iniciar Sesion",
+		id: "login",
+	}
+];
+
+export const navloged = [
+	{
+		to: "/",
+		text: "Sobre Nostros",
+		id: "about",
 	},
+	{
+		to: "/logout",
+		text: "Salir",
+		id: "logout",
+	}
 ];

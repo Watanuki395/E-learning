@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { CgMenuRight } from 'react-icons/cg';
 import { IconContext } from 'react-icons';
@@ -13,12 +13,15 @@ import {
 	NavItem,
 } from './NavbarStyles.js';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { data } from '../../data/NavbarData';
+import { navlogout, navloged } from '../../data/NavbarData';
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
 	const [show, setShow] = useState(false);
+	const { logout, user, persist } = useAuth();
+	const data = []
 
-	let history = useNavigate();
+	let navigate = useNavigate();
 	let location = useLocation();
 
 	const handleClick = () => {
@@ -27,23 +30,22 @@ const Navbar = () => {
 
 	const scrollTo = (id) => {
 		const element = document.getElementById(id);
-
 		element.scrollIntoView({
 			behavior: 'smooth',
 		});
 	};
 
 	const closeMobileMenu = (to, id) => {
-		if (id && location.pathname === '/') {
+		if (id && id === "about" && location.pathname === '/') {
 			scrollTo(id);
 		}
 
-		history.push(to);
+		navigate(to);
 		setShow(false);
 	};
 
 	return (
-		<IconContext.Provider value={{ color: '#fff' }}>
+		<IconContext.Provider value={{ color: '#e2e8e8' }}>
 			<Nav>
 				<NavbarContainer>
 					<NavLogo to="/">
@@ -54,13 +56,21 @@ const Navbar = () => {
 						{show ? <FaTimes /> : <CgMenuRight />}
 					</MobileIcon>
 					<NavMenu show={show}>
-						{data.map((el, index) => (
+						{persist ? navloged.map((el, index) => (
 							<NavItem key={index}>
 								<NavLinks onClick={() => closeMobileMenu(el.to, el.id)}>
 									{el.text}
 								</NavLinks>
 							</NavItem>
-						))}
+						)) :
+						navlogout.map((el, index) => (
+							<NavItem key={index}>
+								<NavLinks onClick={() => closeMobileMenu(el.to, el.id)}>
+									{el.text}
+								</NavLinks>
+							</NavItem>
+						)) 
+						}
 					</NavMenu>
 				</NavbarContainer>
 			</Nav>

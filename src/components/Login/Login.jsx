@@ -56,6 +56,7 @@
                 setErrorMsg("");
                 setError(false);
                 navigate("/superadmin");
+                setPersist(true);
             }).catch((error)=>{
                 console.log(error);
                     if(error.code = ERROR_CODE_WRONG_PASS){

@@ -49,7 +49,9 @@ export function AuthProvider({ children }) {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const logout = () => signOut(auth);
+  const logout = () => {
+    signOut(auth); 
+  };
 
   const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
 
