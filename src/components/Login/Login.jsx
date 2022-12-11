@@ -2,7 +2,7 @@
     import { useNavigate } from "react-router-dom";
     import { useAuth } from "../../context/AuthContext";
     import { CustumAlert } from "../Alert/Alert";
-    import { Container, Section } from "../../globalStyles";
+    import { Container, Section } from '../../styles/globalStyles';
     import Avatar from "@mui/material/Avatar";
     import Button from "@mui/material/Button";
     import CssBaseline from "@mui/material/CssBaseline";
@@ -93,8 +93,7 @@
             >
             {({ errors, touched, isSubmitting }) => (
                 <Form>
-                <Grid container component="main" sx={{ height: "100vh" }}>
-                    <CssBaseline />
+                <Grid container component="main" sx={{ height: "100vh"}}>
                     <Grid
                     item
                     xs={false}
@@ -129,10 +128,10 @@
                         alignItems: "center",
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                        <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
                         <LockOutlinedIcon />
                         </Avatar>
-                        <Typography component="h1" variant="h5">
+                        <Typography component="h1" variant="h4">
                         Iniciar Sesion
                         </Typography>
                         {isSubmitting && (

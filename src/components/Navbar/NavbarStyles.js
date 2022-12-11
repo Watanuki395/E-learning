@@ -1,19 +1,20 @@
 import styled from 'styled-components';
-import { Container } from '../../globalStyles';
+import { Container } from '../../styles/globalStyles';
 import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
-	background: grey;
+	background: ${({ theme }) => theme.bg};
 	margin-bottom: -80px;
 	height: 80px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.2rem;
-	position: absolute;
-	top: 0;
+	position:sticky;
+    top:0;
 	z-index: 50;
-	width: 100%;
+	width:100%;
+	border-bottom: 0.5px solid rgb(231, 228, 228);
 
 	transition: background-color 0.3s ease-in;
 `;
@@ -27,7 +28,7 @@ export const NavbarContainer = styled(Container)`
 `;
 
 export const NavLogo = styled(Link)`
-	color: #fff;
+	color: ${({ theme }) => theme.text};
 	justify-self: flex-start;
 	cursor: pointer;
 	text-decoration: none;

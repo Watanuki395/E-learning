@@ -45,9 +45,8 @@ const Navbar = () => {
 	};
 
 	return (
-		<IconContext.Provider value={{ color: '#e2e8e8' }}>
 			<Nav>
-				<NavbarContainer>
+
 					<NavLogo to="/">
 						<NavIcon src="./assets/logo.png" alt="logo" />
 						SuperEs
@@ -72,9 +71,8 @@ const Navbar = () => {
 						)) 
 						}
 					</NavMenu>
-				</NavbarContainer>
+
 			</Nav>
-		</IconContext.Provider>
 	);
 };
 

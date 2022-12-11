@@ -4,8 +4,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,7 +11,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import ContainerMUI from "@mui/material/Container";
-import { Container, Section } from "../../globalStyles";
+import { Container, Section } from '../../styles/globalStyles';
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import * as Yup from "yup";
@@ -93,7 +91,7 @@ export const Register = () => {
   };
 
   return (
-    <Section smPadding="50px 10px" inverse id="about" margin="auto">
+    <Section smPadding="50px 10px" inverse id="register" margin="auto">
       <Container>
         {error && (
           <CustumAlert message={errorMsg} title={"Error"} severity={"error"} />
@@ -106,20 +104,19 @@ export const Register = () => {
           {({ errors, touched, isSubmitting }) => (
             <Form>
               <ContainerMUI component="main" maxWidth="sm">
-                <CssBaseline />
                 <Box
                   sx={{
-                    marginTop: 8,
+                    marginTop: 10,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                   }}
                 >
-                  <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
                     <LockOutlinedIcon />
                   </Avatar>
-                  <Typography component="h1" variant="h5">
-                    Sign up
+                  <Typography component="h1" variant="h4">
+                    Registrarse
                   </Typography>
                   {isSubmitting && (
                     <Box sx={{ width: "100%" }}>

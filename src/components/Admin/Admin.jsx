@@ -1,6 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { Container, Section } from "../../globalStyles";
+import { Container, Section } from "../../styles/globalStyles";
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 

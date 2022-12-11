@@ -1,22 +1,28 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
-  *{
-    box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
-  }
+export const GlobalStyle = createGlobalStyle`
+    *, *::before, *::after {
+        margin: 0;
+        box-sizing: border-box;
+		padding: 0;
+    }
+    body {
+        background: ${({ theme }) => theme.bg3};
+        color: ${({ theme }) => theme.text};
+		font-family: 'Roboto', sans-serif;
+        letter-spacing: .6px;
+    }
 `;
 
 export const Container = styled.div`
 	width: 100%;
-	max-width: 1300px;
+	max-width: 100hv;
 	margin-right: auto;
 	margin-left: auto;
 	padding: 0 50px;
-
-	@media screen and (max-width: 960px) {
+    background: ${({ theme }) => theme.bg2};
+    color: ${({ theme }) => theme.text};
+	@media screen and (max-width: 768) {
 		padding: 0 30px;
 	}
 `;
@@ -51,9 +57,10 @@ export const TextWrapper = styled.span`
 	margin-top: ${({ mt }) => (mt ? mt : '')};
 `;
 export const Section = styled.section`
-	padding: ${({ padding }) => (padding ? padding : '140px 0')};
+	padding: ${({ padding }) => (padding ? padding : '100px 0')};
 	margin: ${({ margin }) => (margin ? margin : '')};
-	background: ${({ inverse }) => (inverse ? 'white' : '#071c2f')};
+	background: ${({ theme }) => theme.bg2};
+    color: ${({ theme }) => theme.text};
 	position: ${({ position }) => (position ? position : '')};
 	width: ${({ width }) => (width ? width : 'auto')};
 	min-width: ${({ minWidth }) => (minWidth ? minWidth : 'auto')};
@@ -61,9 +68,9 @@ export const Section = styled.section`
 	height: ${({ height }) => (height ? height : 'auto')};
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
-
 	@media screen and (max-width: 768px) {
 		padding: ${({ smPadding }) => (smPadding ? smPadding : '70px 0')};
+		width: ${({ width }) => (width ? width : '100vh')};
 	}
 `;
 
@@ -113,7 +120,6 @@ export const Button = styled.button`
 	cursor: pointer;
 	overflow: hidden;
 	position: relative;
-
 	&:before {
 		background: #fff;
 		content: '';
@@ -127,14 +133,10 @@ export const Button = styled.button`
 		height: 0%;
 		transform: translate(-50%, -50%) rotate(45deg);
 	}
-
 	&:hover:before {
 		height: 500%;
 	}
-
 	&:hover {
 		color: black;
 	}
 `;
-
-export default GlobalStyle;

@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { Button } from '../../globalStyles';
+import { Button } from '../../styles/globalStyles';
 
 export const HeroSection = styled.section`
+	display:flex;
+	flex-direction:column;
 	height: 100vh;
+	width:100%;
 	background-position: center;
 	background-size: cover;
 	padding-top: clamp(70px, 25vh, 220px);

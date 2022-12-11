@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Section } from '../../globalStyles';
+import { Container, Section } from "../../styles/globalStyles";
 import {
 	ContentRow,
 	TextWrapper,

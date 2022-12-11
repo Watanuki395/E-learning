@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Heading, TextWrapper } from '../../globalStyles';
+import { Button, Heading, TextWrapper } from '../../styles/globalStyles';
 import { IconContext } from 'react-icons/lib';
 import {
 	PricingSection,

@@ -13,7 +13,7 @@ import {
 	FooterGrid,
 } from './FooterStyles';
 import { footerData, footerSocialData } from '../../data/FooterData';
-import { Row, Section } from '../../globalStyles';
+import { Row, Section } from '../../styles/globalStyles';
 
 function Footer() {
 	return (

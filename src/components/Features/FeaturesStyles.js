@@ -36,9 +36,9 @@ export const FeatureColumn = styled(motion.div)`
 	flex-flow: column;
 	justify-content: center;
 	align-items: center;
-	background: #f3f3f3;
+	background:  ${({ theme }) => theme.bg3};
 	padding: 10px;
-	box-shadow: 0 0 32px 8px #d0d0d0;
+	box-shadow: 0 0 5px 1px #d0d0d0;
 	border-radius: 20px;
 `;
 
@@ -66,7 +66,7 @@ export const FeatureText = styled.p`
 	font-size: 0.9rem;
 	line-height: 1.73;
 	letter-spacing: 0.5px;
-	color: #626881;
+	color: ${({ theme }) => theme.text};
 
 	@media screen and (max-width: 768px) {
 		display: none;
