@@ -10,6 +10,11 @@ export const HeroSection = styled.section`
 	background-size: cover;
 	padding-top: clamp(70px, 25vh, 220px);
 	box-shadow: inset 0 0 0 1000px rgba (0, 0, 0, 0.2);
+
+	@media screen and (max-width: 468px) {
+		width: 100vh;
+	}
+
 `;
 
 export const HeroVideo = styled.video`
@@ -20,6 +25,11 @@ export const HeroVideo = styled.video`
 	top: 0;
 	position: absolute;
 	z-index: -1;
+
+	@media screen and (max-width: 468px) {
+		width: 100vh;
+	}
+
 `;
 
 export const HeroText = styled.p`

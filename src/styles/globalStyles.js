@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import TextField from "@mui/material/TextField";
 
 export const GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
@@ -16,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
 	width: 100%;
-	max-width: 100hv;
+	max-width: 100%;
 	margin-right: auto;
 	margin-left: auto;
 	padding: 0 50px;
@@ -34,7 +35,6 @@ export const MainHeading = styled.h1`
 	letter-spacing: 4px;
 	text-align: center;
 `;
-
 export const Heading = styled.h2`
 	font-size: clamp(1.3rem, 13vw, 3.1rem);
 	margin: ${({ margin }) => (margin ? margin : '')};
@@ -73,7 +73,6 @@ export const Section = styled.section`
 		width: ${({ width }) => (width ? width : '100vh')};
 	}
 `;
-
 export const Row = styled.div`
 	display: flex;
 	justify-content: ${({ justify }) => (justify ? justify : '')};
@@ -90,7 +89,6 @@ export const Row = styled.div`
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 	flex-wrap: ${({ wrap }) => (wrap ? wrap : '')};
 `;
-
 export const Column = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -107,7 +105,6 @@ export const Column = styled.div`
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 `;
-
 export const Button = styled.button`
 	border-radius: 4px;
 	background: none;
@@ -139,4 +136,34 @@ export const Button = styled.button`
 	&:hover {
 		color: black;
 	}
+`;
+export const StyledTextField = styled(TextField)`
+    .MuiFormLabel-root {
+        color: inherit;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
+    }
+        & .MuiOutlinedInput-notchedOutline {
+        border-color: ${({ theme }) => theme.text};
+    }
+
+    & label.Mui-focused {
+        color:${({ theme }) => theme.text};
+    }
+
+    & .MuiOutlinedInput-root {
+        color:${({ theme }) => theme.text};
+
+        & fieldset {
+        border-color: ${({ theme }) => theme.TextFieldBorder};
+        }
+        &:hover fieldset {
+        border-color: ${({ theme }) => theme.textFieldHover};
+        }
+        &.Mui-focused fieldset {
+        border-color: ${({ theme }) => theme.text};
+        }
+    }
 `;

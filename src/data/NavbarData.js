@@ -18,11 +18,6 @@ export const navlogout = [
 
 export const navloged = [
 	{
-		to: "/",
-		text: "Sobre Nostros",
-		id: "about",
-	},
-	{
 		to: "/logout",
 		text: "Salir",
 		id: "logout",

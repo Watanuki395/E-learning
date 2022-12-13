@@ -6,7 +6,9 @@ export const lightTheme = {
     text: "rgb(45,45,45)",
     primary: "rgb(52, 131, 235)",
     deleteText: "crimson",
-    viewText:"darkblue"
+    viewText:"darkblue",
+    textFieldHover:"#a9a8ad",
+    TextFieldBorder:"#d6d5e6"
 };
 export const darkTheme = {
     bg: "rgb(15,15,15)",
@@ -16,5 +18,7 @@ export const darkTheme = {
     text: "rgb(210,210,210)",
     primary: "rgb(52, 131, 235)",
     deleteText: "crimson",
-    viewText:"rgba(64, 127, 170, 0.75)"
+    viewText:"rgba(64, 127, 170, 0.75)",
+    textFieldHover:"#a9a8ad",
+    TextFieldBorder:"#d6d5e6"
 };

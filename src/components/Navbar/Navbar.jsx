@@ -4,7 +4,6 @@ import { CgMenuRight } from 'react-icons/cg';
 import { IconContext } from 'react-icons';
 import {
 	Nav,
-	NavbarContainer,
 	NavLogo,
 	NavIcon,
 	MobileIcon,

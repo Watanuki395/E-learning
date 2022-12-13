@@ -15,8 +15,13 @@ export const Nav = styled.nav`
 	z-index: 50;
 	width:100%;
 	border-bottom: 0.5px solid rgb(231, 228, 228);
-
 	transition: background-color 0.3s ease-in;
+	padding: 0.5rem calc((70vw - 1000px) / 2);
+	
+
+	@media screen and (max-width: 468px) {
+		width: 100vh;
+	}
 `;
 
 export const NavbarContainer = styled(Container)`

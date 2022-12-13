@@ -2,10 +2,12 @@
     import { useNavigate } from "react-router-dom";
     import { useAuth } from "../../context/AuthContext";
     import { CustumAlert } from "../Alert/Alert";
-    import { Container, Section } from '../../styles/globalStyles';
+    import { 
+        Container, 
+        Section, 
+        StyledTextField } from '../../styles/globalStyles';
     import Avatar from "@mui/material/Avatar";
     import Button from "@mui/material/Button";
-    import CssBaseline from "@mui/material/CssBaseline";
     import TextField from "@mui/material/TextField";
     import Link from "@mui/material/Link";
     import Paper from "@mui/material/Paper";
@@ -93,7 +95,7 @@
             >
             {({ errors, touched, isSubmitting }) => (
                 <Form>
-                <Grid container component="main" sx={{ height: "100vh"}}>
+                <Grid container component="div" sx={{ height: "100%"}}>
                     <Grid
                     item
                     xs={false}
@@ -115,9 +117,8 @@
                     xs={12}
                     sm={8}
                     md={5}
-                    component={Paper}
                     elevation={6}
-                    square
+                    
                     >
                     <Box
                         sx={{
@@ -147,7 +148,7 @@
                                 name="email"
                                 label="Correo Electronico"
                                 type="email"
-                                as={TextField}
+                                as={StyledTextField}
                                 error={
                                 Boolean(errors.email) && Boolean(touched.email)
                                 }
@@ -160,7 +161,7 @@
                                 name="password"
                                 label="Contraseña"
                                 type="password"
-                                as={TextField}
+                                as={StyledTextField}
                                 error={
                                 Boolean(errors.password) &&
                                 Boolean(touched.password)
