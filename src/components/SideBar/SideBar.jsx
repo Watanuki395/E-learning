@@ -8,8 +8,6 @@
         SLinkLabel,
         SLinkNotification,
         SLogo,
-        SSearch,
-        SSearchIcon,
         SSidebar,
         SSidebarButton,
         STheme,
@@ -24,34 +22,35 @@
         AiOutlineApartment,
         AiOutlineHome,
         AiOutlineLeft,
-        AiOutlineSearch,
         AiOutlineSetting,
     } from "react-icons/ai";
+
     import { MdLogout, MdOutlineAnalytics } from "react-icons/md";
     import { BsPeople } from "react-icons/bs";
 
     import { ThemeContext } from "../../App";
     import { useLocation } from "react-router-dom";
+    import { useAuth } from "../../context/AuthContext";
 
     const SideBar = () => {
-    const searchRef = useRef(null);
     const { setTheme, theme } = useContext(ThemeContext);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { pathname } = useLocation();
+    const { logout, user, persist, setPersist } = useAuth();
 
-    const searchClickHandler = () => {
-        if (!sidebarOpen) {
-        setSidebarOpen(true);
-        searchRef.current.focus();
-        } else {
-        // search functionality
-        }
-    };
+    const handleLogout = async () => {
+		try {
+		await logout()
+		setPersist(false);
+		console.log('Logout successfully');
+		} catch (error) {
+		console.error(error.message);
+		setPersist(false);
+		}
+	};
 
-    const isLogged = false;
-
-    return isLogged ? (
-        <SSidebar isOpen={sidebarOpen}>
+    return persist ? (
+        <SSidebar isOpen={sidebarOpen} id="sidebar">
         <>
             <SSidebarButton
             isOpen={sidebarOpen}
@@ -81,14 +80,17 @@
             </SLinkContainer>
         ))}
         <SDivider />
-        {secondaryLinksArray.map(({ icon, label }) => (
-            <SLinkContainer key={label}>
-            <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
-                <SLinkIcon>{icon}</SLinkIcon>
-                {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
+            <SLinkContainer key='logout' onClick={handleLogout}>
+            <SLink style={!sidebarOpen ? { width: `fit-content` } : {}}>
+                <SLinkIcon>{<MdLogout />}</SLinkIcon>
+                {sidebarOpen && (
+                <>
+                    <SLinkLabel>{'Cerrar Sesión'}</SLinkLabel>
+                </>
+                )}
             </SLink>
             </SLinkContainer>
-        ))}
+
         <SDivider />
         <STheme>
             {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
@@ -128,19 +130,14 @@
             label: "Diagrams",
             icon: <AiOutlineApartment />,
             to: "/diagrams",
-            notification: 1,
+            notification: 0,
         },
-    ];
-
-    const secondaryLinksArray = [
         {
             label: "Settings",
             icon: <AiOutlineSetting />,
-        },
-        {
-            label: "Logout",
-            icon: <MdLogout />,
-        },
+            to: "/diagrams",
+            notification: 0,
+        }
     ];
 
 

@@ -86,7 +86,7 @@ export const Register = () => {
   };
 
   return (
-    <Section smPadding="50px 10px" inverse id="register" margin="auto">
+    <Section smPadding="50px 10px" inverse id="register" height="100vh">
       <Container>
         <Formik
           initialValues={initialValues}

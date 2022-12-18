@@ -86,7 +86,7 @@
     };
 
     return (
-        <Section smPadding="50px 10px" inverse id="about" margin="auto">
+        <Section smPadding="50px 10px" inverse id="login" height="100vh">
         <Container>
             <Formik
             initialValues={initialValues}

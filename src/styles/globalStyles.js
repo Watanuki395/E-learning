@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import TextField from "@mui/material/TextField";
+import { createTheme } from '@mui/material/styles';
 
 export const GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
@@ -55,22 +56,25 @@ export const TextWrapper = styled.span`
 	margin: ${({ margin }) => (margin ? margin : '')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '')};
 	margin-top: ${({ mt }) => (mt ? mt : '')};
+	text-align:  ${({ align }) => (align ? align : '')};
 `;
 export const Section = styled.section`
+	display: flex;
+	flex-direction:column;
 	padding: ${({ padding }) => (padding ? padding : '100px 0')};
-	margin: ${({ margin }) => (margin ? margin : '')};
+	margin: ${({ margin }) => (margin ? margin : 'auto')};
 	background: ${({ theme }) => theme.bg2};
     color: ${({ theme }) => theme.text};
-	position: ${({ position }) => (position ? position : '')};
-	width: ${({ width }) => (width ? width : 'auto')};
+	position: ${({ position }) => (position ? position : 'auto')};
+	width: ${({ width }) => (width ? width : '100%')};
 	min-width: ${({ minWidth }) => (minWidth ? minWidth : 'auto')};
 	max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : 'auto')};
 	height: ${({ height }) => (height ? height : 'auto')};
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 	@media screen and (max-width: 768px) {
-		padding: ${({ smPadding }) => (smPadding ? smPadding : '70px 0')};
-		width: ${({ width }) => (width ? width : '100vh')};
+		padding: ${({ smPadding }) => (smPadding ? smPadding : '100px 0')};
+		width: ${({ width }) => (width ? width : '100%')};
 	}
 `;
 export const Row = styled.div`

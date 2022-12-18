@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
+
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRote";
-//import Layout from "./components/Layout/Layout";
 import { ThemeProvider } from "styled-components";
 import LayoutSB from "./components/Layout/Layout";
-import Layout from "./components/mLayout/Layout";
+
 import { GlobalStyle } from "./styles/globalStyles";
 import { darkTheme, lightTheme } from "./styles/theme";
 
@@ -17,15 +16,11 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Admin } from "./components/Admin/Admin";
 import Missing from "./components/Missing/Missing";
+import Navbar from "./components/Navbar/Navbar";
 
 export const ThemeContext = React.createContext(null);
 
 function App() {
-	const [isOpen, setIsOpen] = useState(false);
-
-	const toggle = () => {
-		setIsOpen(!isOpen);
-	};
 
 	const [theme, setTheme] = useState("dark");
 	const themeStyle = theme === "light" ? lightTheme : darkTheme;
@@ -34,10 +29,11 @@ function App() {
 		<ThemeContext.Provider value={{ setTheme, theme }}>
 		<ThemeProvider theme={themeStyle}>
 			<GlobalStyle />
-			<LayoutSB toggle={toggle}>
+
+			<LayoutSB >
 			<Navbar />
 			<Routes>
-				<Route path="/" element={<Layout />}>
+
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/pricing" element={<Pricing />} />
@@ -55,7 +51,7 @@ function App() {
 				</Route>
 				{/* catch all */}
 				<Route path="*" element={<Missing />} />
-				</Route>
+				
 			</Routes>
 			</LayoutSB>
 		</ThemeProvider>

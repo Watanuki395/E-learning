@@ -15,11 +15,14 @@ export const SSidebar = styled.div`
     width: ${({ isOpen }) => (!isOpen ? `auto` : v.sidebarWidth)};
     background: ${({ theme }) => theme.bg};
     height: 100vh;
-    padding: ${v.lgSpacing};
-    position: relative;
+    padding: ${v.mdSpacing};
+
     }
     @media screen and (max-width: 568px) {
-    display:none;
+    width: ${({ isOpen }) => (!isOpen ? v.sidebarWidth : v.sidebarWidth)};
+    background: ${({ theme }) => theme.bg};
+    height: 100vh;
+    padding: ${v.smSpacing};
     }
 `;
 

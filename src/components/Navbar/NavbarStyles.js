@@ -3,7 +3,7 @@ import { Container } from '../../styles/globalStyles';
 import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
-	background: ${({ theme }) => theme.bg};
+	background: ${({ theme }) => theme.bg2};
 	margin-bottom: -80px;
 	height: 80px;
 	display: flex;
@@ -14,7 +14,7 @@ export const Nav = styled.nav`
     top:0;
 	z-index: 50;
 	width:100%;
-	border-bottom: 0.5px solid rgb(231, 228, 228);
+	
 	transition: background-color 0.3s ease-in;
 	padding: 0.5rem calc((70vw - 1000px) / 2);
 	
@@ -93,6 +93,10 @@ export const NavMenu = styled.ul`
 export const NavItem = styled.li`
 	height: 80px;
 	cursor: pointer;
+	display: flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
 
 	@media screen and (max-width: 960px) {
 		width: 100%;
@@ -139,4 +143,13 @@ export const NavBtnLink = styled(Link)`
 	width: 100%;
 	border: none;
 	outline: none;
+`;
+
+export const UserWrapper = styled.span`
+	margin-left: 5px;
+	font-size: smaller;
+
+	@media screen and (max-width: 960px) {
+		display: none;
+	}
 `;
