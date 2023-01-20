@@ -57,7 +57,7 @@
             await login(vals.email, vals.password).then(()=>{
                 setErrorMsg("");
                 setError(false);
-                navigate("/superadmin");
+                navigate("/dashboard");
                 setPersist(true);
             }).catch((error)=>{
                 console.log(error);

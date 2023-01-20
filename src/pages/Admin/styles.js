@@ -17,7 +17,7 @@ export const DashboardGrid = styled.div`
     grid-template-columns: 9fr 4fr;
     column-gap:2rem;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1120px) {
         grid-template-columns: 1fr;
         row-gap:2rem;
     }
@@ -31,6 +31,30 @@ export const ChartGrid = styled.div`
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
         row-gap:2rem;
+    }
+`;
+
+export const TableWrapper = styled.div`
+    display:grid;
+    grid-template-columns: 1fr;
+    padding-top:1.5rem;
+    align-items:center;
+    align-content:center;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        column-gap:1.5rem;
+    }
+`;
+
+export const DataTableWrapper = styled.div`
+    padding-top: 1rem;
+    height: 500px;
+    min-height:500px;
+
+    @media screen and (max-width: 568px) {
+        width:100%;
+        height: 500px;
     }
 `;
 

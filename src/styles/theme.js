@@ -1,7 +1,8 @@
 export const lightTheme = {
+    sbg: "rgb(147,147,160)",
     bg: "rgb(255,255,255)",
     bgAlpha: "rgba(250,250,250,.3)",
-    bg2: "rgb(245,245,245)",
+    bg2: "rgb(190,200,205, .5)",
     bg3: "rgb(230,230,230)",
     bg4: "rgb(230,230,230)",
     text: "rgb(45,45,45)",
@@ -12,6 +13,7 @@ export const lightTheme = {
     TextFieldBorder:"#d6d5e6"
 };
 export const darkTheme = {
+    sbg: "rgb(15,15,15)",
     bg: "rgb(15,15,15)",
     bgAlpha: "rgba(0,0,0,.3)",
     bg2: "rgb(30,30,30)",

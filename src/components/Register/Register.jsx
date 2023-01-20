@@ -70,7 +70,7 @@ export const Register = () => {
           .then(() => {
             setErrorMsg("");
             setError(false);
-            navigate("/superadmin");
+            navigate("/dashboard");
           })
           .catch((error) => {
             if ((error.code = ERROR_CODE_ACCOUNT_EXISTS)) {

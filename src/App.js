@@ -14,7 +14,7 @@ import SignUp from "./pages/SignupPage";
 import Pricing from "./pages/PricingPage";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
-import { Admin } from "./components/Admin/Admin";
+import { Dashboard } from "./pages/Admin/Dashboard";
 import Missing from "./components/Missing/Missing";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -42,7 +42,7 @@ function App() {
 
 				{/* we want to protect these routes */}
 				<Route element={<ProtectedRoute />}>
-					<Route path="/superadmin" element={<Admin />} />
+					<Route path="/dashboard" element={<Dashboard />} />
 					{/* <Route path="/menu" element={<MenuPage title="Lista de Categorias"/>} />
 							<Route path='/new/product' element={<NewProductPage title="Añadir Nuevo Producto"/>} />
 							<Route path='/CategoryByProduct/:id_cat' element={<CategoryByProductPage/>} />
