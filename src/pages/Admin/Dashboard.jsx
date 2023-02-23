@@ -1,12 +1,11 @@
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { Container, Section, TextWrapper } from "../../styles/globalStyles";
+import { Container, Section, TextWrapper, CustomCard, CustomCardContent, CardHeading } from "../../styles/globalStyles";
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid';
 import {DataTable} from '../../components/Table/DataTable'
 
 
@@ -15,9 +14,6 @@ import {
     DashboardGrid,
     ChartGrid,
     TableWrapper,
-    CustomCard,
-    CustomCardContent,
-    CardHeading,
     StyledDoneAllOutlinedIcon,
     StyledTrendingUpOutlinedIcon,
     IconContainer,
@@ -99,17 +95,17 @@ export function Dashboard() {
     }, [persist]);
     return (
         
-            <Section height="100%">
+            <Section height="100%" id="dashboard">
                 <Container>
                     <DashboardHeader>
                         <TextWrapper>Hola, <strong>{user.email}</strong></TextWrapper>
                         <TextWrapper size="smaller">Aquí hay información que recopilamos para ti</TextWrapper>
                     </DashboardHeader>
-                    <DashboardGrid>
+                    <DashboardGrid id="dashboarGrid">
                         <div>
                             <ChartGrid>
                                 <CustomCard>
-                                    <CustomCardContent>
+                                    <CustomCardContent gcolumns="1fr 64px" id="progress-chart1">
                                         <CardContentWrapper>
                                         <CardHeading>Ventas</CardHeading>
                                         <TextWrapper size="small" color="grey">Hoy</TextWrapper>
@@ -123,7 +119,7 @@ export function Dashboard() {
                                     </CustomCardContent>
                                 </CustomCard>
                                 <CustomCard>
-                                        <CustomCardContent>
+                                        <CustomCardContent gcolumns="1fr 64px" id="progress-chart2">
                                         <CardContentWrapper>
                                             <CardHeading>Completos</CardHeading>
                                             <TextWrapper size="small" color="grey">Hoy</TextWrapper>

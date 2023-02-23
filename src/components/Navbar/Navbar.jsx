@@ -58,6 +58,11 @@ const Navbar = () => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const handleGoToSetting = () => {
+		navigate("/profile");
+		setAnchorEl(null);
+	};
 	
 	const handleLogout = async () => {
 		try {
@@ -140,7 +145,7 @@ const Navbar = () => {
 						open={Boolean(anchorEl)}
 						onClose={handleClose}
 					>
-						<MenuItem onClick={handleClose}>Configuración de Cuenta</MenuItem>
+						<MenuItem onClick={handleGoToSetting}>Configuración de Cuenta</MenuItem>
 						<MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
 					</Menu>
 				</NavItem>

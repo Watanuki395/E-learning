@@ -14,6 +14,7 @@ export const SMain = styled.main`
   padding: calc(${v.smSpacing} * 0);
   width:100%;
   margin:0;
+  position: relative;
 
   @media screen and (max-width: 568px) {
     width: 100vh;

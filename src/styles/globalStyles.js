@@ -1,6 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
 import TextField from "@mui/material/TextField";
-import { createTheme } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from "@mui/material/Button";
 
 export const GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
@@ -58,7 +60,7 @@ export const TextWrapper = styled.span`
 	margin-top: ${({ mt }) => (mt ? mt : '')};
 	text-align:  ${({ align }) => (align ? align : '')};
 `;
-export const Section = styled.section`
+export const Section = styled.div`
 	display: flex;
 	flex-direction:column;
 	padding: ${({ padding }) => (padding ? padding : '100px 0')};
@@ -109,7 +111,7 @@ export const Column = styled.div`
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 `;
-export const Button = styled.button`
+export const xButton = styled.button`
 	border-radius: 4px;
 	background: none;
 	white-space: nowrap;
@@ -169,5 +171,53 @@ export const StyledTextField = styled(TextField)`
         &.Mui-focused fieldset {
         border-color: ${({ theme }) => theme.text};
         }
+    }
+`;
+
+export const CustomCard = styled(Card)`
+    &.MuiCard-root{
+        background-color: ${({ theme }) => theme.bg3};
+        color: ${({ theme }) => theme.text};
+        border: 1px solid #26293A;
+        overflow: visible;
+        border-radius:10px;
+    }
+
+    @media screen and (max-width: 768px) {
+    }
+`;
+
+export const CustomCardContent = styled(CardContent)`
+    display:grid;
+    grid-template-columns: ${({ gcolumns }) => (gcolumns ? gcolumns : '1fr')};
+    grid-column-gap:2.4rem;
+
+    @media screen and (max-width: 768px) {
+    }
+`;
+
+export const CardHeading = styled.div`
+    font-size:1.2rem;
+
+    @media screen and (max-width: 768px) {
+    }
+`;
+
+export const CustomButton = styled(Button)`
+	&.MuiButton-root{
+		color: ${({ theme }) => theme.text};
+		border: 1px solid ${({ theme }) => theme.text};
+
+		&:hover {
+		transform: scale(1.06);
+		transition: all 0.3s ease-out;
+		background-color: ${({ theme }) => theme.text};
+		color: ${({ theme }) => theme.bg3};
+		border: 1px solid ${({ theme }) => theme.bg3};
+		box-shadow: 5px 5px 5px #aaaaaa;
+	}
+	}
+	
+    @media screen and (max-width: 768px) {
     }
 `;

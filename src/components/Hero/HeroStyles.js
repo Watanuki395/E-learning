@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../styles/globalStyles';
+import { xButton } from '../../styles/globalStyles';
 
 export const HeroSection = styled.section`
 	display:flex;
@@ -49,7 +49,7 @@ export const ButtonWrapper = styled.div`
 	gap: 0.5rem;
 `;
 
-export const HeroButton = styled(Button)`
+export const HeroButton = styled(xButton)`
 	color: black;
 
 	&:before {

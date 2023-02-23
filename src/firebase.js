@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 
 
@@ -22,3 +23,13 @@ export const storage = getStorage(app, process.env.REACT_APP_BUCKET_URL);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
+const callFirebaseFunction = event => {
+    const functions = getFunctions();
+    const callableReturnMessage = httpsCallable(functions, 'addAdminRole');
+
+    callableReturnMessage().then((result) => {
+      console.log(result.data.output);
+    }).catch((error) => {
+      console.log(`error: ${JSON.stringify(error)}`);
+    });
+}

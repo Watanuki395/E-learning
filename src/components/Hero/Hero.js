@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-	Button,
+	xButton,
 	MainHeading,
 } from "../../styles/globalStyles";
 import {
@@ -23,7 +23,7 @@ const Hero = () => {
 		</HeroText>
 		<ButtonWrapper>
 			<Link to="signup">
-			<Button>Comenzar</Button>
+			<xButton>Comenzar</xButton>
 			</Link>
 			<HeroButton>Ver Más</HeroButton>
 		</ButtonWrapper>

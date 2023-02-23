@@ -58,34 +58,6 @@ export const DataTableWrapper = styled.div`
     }
 `;
 
-export const CustomCard = styled(Card)`
-    &.MuiCard-root{
-        background-color: ${({ theme }) => theme.bg3};
-        color: ${({ theme }) => theme.text};
-        border: 1px solid #26293A;
-        overflow: visible;
-        border-radius:10px;
-    }
-
-    @media screen and (max-width: 768px) {
-    }
-`;
-
-export const CustomCardContent = styled(CardContent)`
-    display:grid;
-    grid-template-columns:1fr 64px;
-    grid-column-gap:2.4rem;
-
-    @media screen and (max-width: 768px) {
-    }
-`;
-
-export const CardHeading = styled.div`
-    font-size:1.2rem;
-
-    @media screen and (max-width: 768px) {
-    }
-`;
 
 export const StyledTrendingUpOutlinedIcon = styled(TrendingUpOutlinedIcon)`
     &.MuiSvgIcon-root{
