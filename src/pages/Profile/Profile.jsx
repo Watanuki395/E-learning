@@ -9,6 +9,8 @@ import {
   StyledTextField,
 } from "../../styles/globalStyles";
 import SaveBar from "../../components/SaveBar/Savebar";
+import { MdOutlineSave } from "react-icons/md";
+import { AiOutlineClear } from "react-icons/ai";
 
 
 import { Formik, Form, Field } from "formik";
@@ -17,11 +19,14 @@ import * as Yup from "yup";
 import { ProfileGrid, StyledAvatar, StyledFormGrid } from "./styles";
 
 const Profile = () => {
+
   const initialValues = {
     fname: "",
     lname: "",
     email: ""
   };
+
+  const [values, setValues] = useState(initialValues);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -68,8 +73,14 @@ const Profile = () => {
   const [error, setError] = useState(false);
 
   const handleSubmit = async (vals) => {
+    console.log(vals);
     setError(false);
   };
+
+  let btnNames = [{name:'Limpiar', type:'reset', icon: <AiOutlineClear/>},
+                  {name:'Guardar', type:'submit', icon: <MdOutlineSave/>},
+                ]
+
   return (
     <Section height="100%" position="relative">
       <Container>
@@ -97,7 +108,6 @@ const Profile = () => {
                         error={Boolean(errors.fname) && Boolean(touched.fname)}
                         helperText={Boolean(touched.fname) && errors.fname}
                       />
-
                       <Field
                         fullWidth
                         name="lname"
@@ -122,6 +132,7 @@ const Profile = () => {
                         helperText={Boolean(touched.email) && errors.email}
                       />
                       </StyledFormGrid>
+                      <SaveBar btnNames={btnNames}/>
                     </Form>
                   )}
                 </Formik>
@@ -139,7 +150,7 @@ const Profile = () => {
             </CustomCardContent>
           </CustomCard>
         </ProfileGrid>
-        <SaveBar/>
+       
       </Container>
     </Section>
   );

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
     CustomCard,
     CustomCardContent,
@@ -8,7 +7,7 @@ import {
 
 import {StyledButtonGrid, SaveBarContainer} from "./styles";
 
-const SaveBar = () => {
+const SaveBar = ({btnNames}) => {
 
     return (
         <SaveBarContainer>
@@ -18,8 +17,14 @@ const SaveBar = () => {
                 id="profile-preferences"
                 >
                 <StyledButtonGrid>
-                    <CustomButton>Atras</CustomButton>
-                    <CustomButton>Guardar</CustomButton>
+                    {btnNames? btnNames.map((item, index)=>{
+                        return <CustomButton key={item.name +'_'+index} 
+                        type={item.type}
+                        endIcon={item.icon}
+                        > 
+                        {item.name}
+                        </CustomButton>
+                    }):''}
                 </StyledButtonGrid>
                 </CustomCardContent>
             </CustomCard>

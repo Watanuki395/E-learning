@@ -214,7 +214,7 @@ export const CustomButton = styled(Button)`
 		background-color: ${({ theme }) => theme.text};
 		color: ${({ theme }) => theme.bg3};
 		border: 1px solid ${({ theme }) => theme.bg3};
-		box-shadow: 5px 5px 5px #aaaaaa;
+		/* box-shadow: 5px 5px 5px #aaaaaa; */
 	}
 	}
 	
