@@ -21,8 +21,8 @@ export const HeroVideo = styled.video`
 	object-fit: cover;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
-	top: 0;
+	background: linear-gradient(90deg, rgba(2,0,36,0.9612219887955182) 29%, rgba(2,2,28,0.6727065826330532) 71%, rgba(26,10,54,1) 100%);;
+	top:0;
 	position: absolute;
 	z-index: -1;
 

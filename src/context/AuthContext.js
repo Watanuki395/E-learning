@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log({ currentUser });
+      console.log({ currentUser }); //TODO: removed it for PROD
       setUser(currentUser);
       setLoading(false);
     });

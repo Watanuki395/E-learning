@@ -3,7 +3,7 @@ import { Container } from '../../styles/globalStyles';
 import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
-	background: ${({ theme }) => theme.bg2};
+	background: ${({ theme }) => theme.bg3};
 	margin-bottom: -80px;
 	height: 80px;
 	display: flex;

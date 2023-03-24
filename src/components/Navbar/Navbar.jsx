@@ -111,7 +111,7 @@ const Navbar = () => {
 		<Nav>
 		{!persist ? <NavLogo to="/">
 			<NavIcon src="./assets/logo.png" alt="logo" />
-			SuperEs
+			LearningHub
 		</NavLogo>:<></>}
 		<MobileIcon onClick={handleClick}>
 			{show ? <FaTimes /> : <CgMenuRight />}

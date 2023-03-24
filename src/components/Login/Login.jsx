@@ -28,7 +28,8 @@
     email: Yup.string()
         .required("Campo Requerido")
         .email("Correo Electrónico Inválido")
-        .max(255, `Máximo 255 caracteres`),
+        .max(255, `Máximo 255 caracteres`)
+        .min(5, `Minimo 5 caracteres`),
     password: Yup.string()
         .required("Campo Requerido")
         .min(8, `Mínimo 8 caracteres`),
@@ -39,8 +40,7 @@
 
         const ERROR_MSG_WRONG_PASS = `Usuario y/o contraseña no validos`;
 
-    const { login, resetPassword, persist, setPersist } =
-        useAuth();
+    const { login, resetPassword, persist, setPersist } = useAuth();
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -149,9 +149,7 @@
                                 label="Correo Electronico"
                                 type="email"
                                 as={StyledTextField}
-                                error={
-                                Boolean(errors.email) && Boolean(touched.email)
-                                }
+                                error={ Boolean(errors.email) && Boolean(touched.email) }
                                 helperText={Boolean(touched.email) && errors.email}
                             />
                             </Grid>
@@ -162,13 +160,8 @@
                                 label="Contraseña"
                                 type="password"
                                 as={StyledTextField}
-                                error={
-                                Boolean(errors.password) &&
-                                Boolean(touched.password)
-                                }
-                                helperText={
-                                Boolean(touched.password) && errors.password
-                                }
+                                error={ Boolean(errors.password) && Boolean(touched.password) }
+                                helperText={ Boolean(touched.password) && errors.password }
                             />
                             </Grid>
                             <Grid item xs={12}>

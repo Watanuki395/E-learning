@@ -145,7 +145,10 @@ export const xButton = styled.button`
 `;
 export const StyledTextField = styled(TextField)`
     .MuiFormLabel-root {
-        color: inherit;
+        color: ${({ theme }) => theme.text};
+    }
+    .MuiFormLabel-root.Mui-disabled {
+        color: ${({ theme }) => theme.text};
     }
     input:-webkit-autofill,
     input:-webkit-autofill:focus {
@@ -172,6 +175,14 @@ export const StyledTextField = styled(TextField)`
         border-color: ${({ theme }) => theme.text};
         }
     }
+
+	.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+		border-color: rgb(202 198 198);
+	}
+
+	.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+		-webkit-text-fill-color:${({ theme }) => theme.text};
+	}
 `;
 
 export const CustomCard = styled(Card)`
@@ -215,7 +226,7 @@ export const CustomButton = styled(Button)`
 		color: ${({ theme }) => theme.bg3};
 		border: 1px solid ${({ theme }) => theme.bg3};
 		/* box-shadow: 5px 5px 5px #aaaaaa; */
-	}
+		}
 	}
 	
     @media screen and (max-width: 768px) {
