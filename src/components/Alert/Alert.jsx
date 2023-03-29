@@ -7,34 +7,34 @@ import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 import Snackbar from '@mui/material/Snackbar';
 
-import {
-  StyledAlert
-  } from "./styles";
 
-export function CustumAlert({message, title, severity}) {
-  const [open, setOpen] = React.useState(true);
+export function CustumAlert({notify, setNotify}) {
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
-    setOpen(false);
+    setNotify({... notify, isOpen:false});
   };
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}  anchorOrigin={{  vertical: 'top', horizontal: 'right' }}>
-        <Collapse in={open}>
+      <Snackbar 
+          open={notify.isOpen} 
+          autoHideDuration={6000} 
+          onClose={handleClose}  
+          anchorOrigin={{  vertical: 'top', horizontal: 'right' }}
+          >
+        <Collapse in={notify.isOpen}>
           <Alert
-          severity={severity}
+          severity={notify.type}
             action={
               <IconButton
                 aria-label="close"
                 color="inherit"
                 size="small"
                 onClick={() => {
-                  setOpen(false);
+                  setNotify(false);
                 }}
               >
                 <CloseIcon fontSize="inherit" />
@@ -42,8 +42,8 @@ export function CustumAlert({message, title, severity}) {
             }
             sx={{ mb: 2 }}
           >
-            <AlertTitle>{title}</AlertTitle>
-            {message}
+            <AlertTitle>{notify.title}</AlertTitle>
+            {notify.message}
           </Alert>
         </Collapse>
       </Snackbar>

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ImSpinner6 } from "react-icons/im";
+
 
 
 export const StyledButtonGrid = styled.div`
@@ -20,4 +22,18 @@ export const SaveBarContainer = styled.div`
     z-index: 10;
     width:100%;
 
+`;
+
+export const CustomSpinner = styled(ImSpinner6)`
+    height: 20px;
+    width: 20px;
+    animation: spin 2s linear infinite;
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        } 
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 `;

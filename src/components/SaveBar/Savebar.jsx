@@ -5,9 +5,9 @@ import {
 } from "../../styles/globalStyles";
 
 
-import {StyledButtonGrid, SaveBarContainer} from "./styles";
+import {StyledButtonGrid, SaveBarContainer, CustomSpinner} from "./styles";
 
-const SaveBar = ({btnNames}) => {
+const SaveBar = ({btnNames, isSubmitting}) => {
 
     return (
         <SaveBarContainer>
@@ -18,9 +18,11 @@ const SaveBar = ({btnNames}) => {
                 >
                 <StyledButtonGrid>
                     {btnNames? btnNames.map((item, index)=>{
-                        return <CustomButton key={item.name +'_'+index} 
-                        type={item.type}
-                        endIcon={item.icon}
+                        return <CustomButton 
+                            key={item.name +'_'+index} 
+                            type={item.type}
+                            endIcon={!isSubmitting ? item.icon : <CustomSpinner/>}
+                            disabled={isSubmitting}
                         > 
                         {item.name}
                         </CustomButton>

@@ -38,9 +38,19 @@ cursor:pointer;
 }
 `;
 
-
 export const StyledFormGrid = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+`
+
+export const StyledFormGridRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+
+    @media screen and (max-width: 970px) {
+        flex-direction: column;
+    }
+
 `

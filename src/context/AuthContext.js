@@ -17,6 +17,7 @@ import {
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
+import { getUser } from "../firebase/api";
 
 const authContext = createContext();
 
@@ -30,6 +31,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [persist, setPersist] = useState(JSON.parse(localStorage.getItem("persist")) || false);
+  const [userInfo, setUserInfo] = useState([]);
 
   const signup = async (email, password, data) => {
     await createUserWithEmailAndPassword(auth, email, password);
@@ -55,10 +57,23 @@ export function AuthProvider({ children }) {
 
   const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
 
+
+  const getMyUserById = async (id) => {
+    try {
+      const doc = await getUser(id);
+      setUserInfo({ ...doc.data() });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log({ currentUser }); //TODO: removed it for PROD
       setUser(currentUser);
+      if (currentUser?.uid) {
+        getMyUserById(currentUser.uid);
+        };
       setLoading(false);
     });
     return () => unsubuscribe();
@@ -72,6 +87,7 @@ export function AuthProvider({ children }) {
         signup,
         login,
         user,
+        userInfo,
         logout,
         loading,
         loginWithGoogle,

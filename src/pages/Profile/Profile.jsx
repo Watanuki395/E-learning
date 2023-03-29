@@ -8,8 +8,7 @@ import {
   CustomCard,
   CustomCardContent,
   CardHeading,
-  StyledTextField,
-  CustomButton
+  StyledTextField
 } from "../../styles/globalStyles";
 import SaveBar from "../../components/SaveBar/Savebar";
 import { MdOutlineSave } from "react-icons/md";
@@ -20,38 +19,18 @@ import { CustumAlert } from "../../components/Alert/Alert";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-import { ProfileGrid, StyledAvatar, StyledFormGrid } from "./styles";
-import { user } from "../../context/AuthContext";
-import { getUser, updateUser } from "../../firebase/api";
+import { ProfileGrid, StyledAvatar, StyledFormGrid, StyledFormGridRow } from "./styles";
+import { updateUser } from "../../firebase/api";
 
 const Profile = () => {
 
-  const { user } = useAuth();
+  const { user, userInfo } = useAuth();
 
-  const [myUser, setMyUser] = useState([]);
-  const [alert, setAlert] = useState(false);
-
-  const getMyUserById = async (id) => {
-    try {
-      const doc = await getUser(id);
-      setMyUser({ ...doc.data() });
-      console.log(myUser);
-
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    if (user.uid) {
-    getMyUserById(user.uid);
-    
-    }
-  }, [user.uid]);
+  const [notify, setNotify] = useState({isOpen: false, title:'', message:'', type:''});
 
   const initialValues = {
-    fname: myUser.fname,
-    lname: myUser.lname,
+    fname: userInfo.fname,
+    lname: userInfo.lname,
     email: user.email
   };
 
@@ -104,18 +83,26 @@ const Profile = () => {
     };
   };
 
-
-
   const handleSubmit = async (vals) => {
-    console.log(vals);
     if (vals && user.uid) {
-      await updateUser(user.uid, vals);
-      setAlert(true);
-      
+        await updateUser(user.uid, vals);
+        setNotify({
+          isOpen:true,
+          title:'Actualizacion con Exito',
+          message:'Los datos se actualizaron correctamente',
+          type:'success'
+        });
     } else {
-      toast("invalido", { type: "warning", autoClose: 1000 });
+      setNotify({
+        isOpen:true,
+        title:'Actualizacion con Fallida',
+        message:'Los NO  datos se actualizaron correctamente',
+        type:'error'
+      });
     }
   };
+
+
 
   let btnNames = [{name:'Limpiar', type:'reset', icon: <AiOutlineClear/>},
                   {name:'Actualizar', type:'submit', icon: <MdOutlineSave/>}
@@ -124,20 +111,17 @@ const Profile = () => {
   return (
     <Section height="100%" position="relative">
       <Container>
-      {alert && (
-                <CustumAlert
-                    message={'Nombre Actualizado Correctamente'}
-                    title={"Bien"}
-                    severity={"success"}
-                />
-            )}
+          <CustumAlert
+            notify={notify}
+            setNotify={setNotify}
+          />
         <CardHeading>Admin</CardHeading>
         <ProfileGrid>
           <CustomCard>
             <CustomCardContent gcolumns="1fr" id="profile-info">
               <TextWrapper>Información personal</TextWrapper>
               <CustomCardContent gcolumns="120px 1fr">
-                <StyledAvatar {...stringAvatar("Gerardo Salas Montoya")}/>
+                <StyledAvatar { ...userInfo.fname && userInfo.lname ? {...stringAvatar( userInfo.fname +' '+ userInfo.lname )} : '' }/>
                 <Formik
                   enableReinitialize 
                   initialValues={initialValues}
@@ -147,28 +131,30 @@ const Profile = () => {
                   {({ errors, touched, isSubmitting, values }) => (
                     <Form>
                       <StyledFormGrid>
-                      <Field
-                        fullWidth
-                        name="fname"
-                        label="Nombre"
-                        as={StyledTextField}
-                        value={ values.fname? values.fname : ''}
-                        //onChange={e=>{handleInputChange(e)}}
-                        error={ Boolean(errors.fname) && Boolean(touched.fname) }
-                        helperText={ Boolean(touched.fname) && errors.fname }
-                        disabled={isSubmitting}
-                      />
-                      <Field
-                        fullWidth
-                        name="lname"
-                        label="Apellidos"
-                        value={ values.lname ? values.lname : ''}
-                        //onChange={e=>{handleInputChange(e)}}
-                        as={StyledTextField}
-                        error={ Boolean(errors.lname) && Boolean(touched.lname) }
-                        helperText={ Boolean(touched.lname) && errors.lname }
-                        disabled={isSubmitting}
-                      />
+                        <StyledFormGridRow>
+                          <Field
+                            fullWidth
+                            name="fname"
+                            label="Nombre"
+                            as={StyledTextField}
+                            value={ values.fname? values.fname : ''}
+                            //onChange={e=>{handleInputChange(e)}}
+                            error={ Boolean(errors.fname) && Boolean(touched.fname) }
+                            helperText={ Boolean(touched.fname) && errors.fname }
+                            disabled={isSubmitting}
+                          />
+                          <Field
+                            fullWidth
+                            name="lname"
+                            label="Apellidos"
+                            value={ values.lname ? values.lname : ''}
+                            //onChange={e=>{handleInputChange(e)}}
+                            as={StyledTextField}
+                            error={ Boolean(errors.lname) && Boolean(touched.lname) }
+                            helperText={ Boolean(touched.lname) && errors.lname }
+                            disabled={isSubmitting}
+                          />
+                      </StyledFormGridRow>
                       <Field
                         fullWidth
                         name="email"
@@ -181,7 +167,7 @@ const Profile = () => {
                         helperText={ Boolean(touched.email) && errors.email }
                       />
                       </StyledFormGrid>
-                      <SaveBar btnNames={btnNames}/>
+                      <SaveBar btnNames={btnNames} isSubmitting={isSubmitting}/>
                       
                     </Form>
                   )}

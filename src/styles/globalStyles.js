@@ -219,6 +219,10 @@ export const CustomButton = styled(Button)`
 		color: ${({ theme }) => theme.text};
 		border: 1px solid ${({ theme }) => theme.text};
 
+	&.css-1e6y48t-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+     color: rgb(255 253 253 / 46%);
+    }
+
 		&:hover {
 		transform: scale(1.06);
 		transition: all 0.3s ease-out;
