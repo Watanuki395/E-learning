@@ -34,7 +34,7 @@ export function CustumAlert({notify, setNotify}) {
                 color="inherit"
                 size="small"
                 onClick={() => {
-                  setNotify(false);
+                  setNotify({... notify, isOpen:false});
                 }}
               >
                 <CloseIcon fontSize="inherit" />

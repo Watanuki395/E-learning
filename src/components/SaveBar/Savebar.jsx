@@ -7,7 +7,13 @@ import {
 
 import {StyledButtonGrid, SaveBarContainer, CustomSpinner} from "./styles";
 
-const SaveBar = ({btnNames, isSubmitting}) => {
+const SaveBar = ({btnNames, isSubmitting, setYtLink}) => {
+
+    const handleClick = (e) => {
+
+        setYtLink(false);
+        console.log('Video was removed');
+    };
 
     return (
         <SaveBarContainer>
@@ -20,9 +26,11 @@ const SaveBar = ({btnNames, isSubmitting}) => {
                     {btnNames? btnNames.map((item, index)=>{
                         return <CustomButton 
                             key={item.name +'_'+index} 
+                            name={item.name} 
                             type={item.type}
-                            endIcon={!isSubmitting ? item.icon : <CustomSpinner/>}
+                            endIcon={isSubmitting && item.name == 'Actualizar' ? <CustomSpinner/> : item.icon}
                             disabled={isSubmitting}
+                            onClick={(event)=>{handleClick(event)}}
                         > 
                         {item.name}
                         </CustomButton>

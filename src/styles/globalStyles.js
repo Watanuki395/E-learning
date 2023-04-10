@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         box-sizing: border-box;
 		padding: 0;
+		font-size: 1rem;
     }
     body {
         background: ${({ theme }) => theme.bg3};
@@ -176,11 +177,11 @@ export const StyledTextField = styled(TextField)`
         }
     }
 
-	.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+	.MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
 		border-color: rgb(202 198 198);
 	}
 
-	.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+	.MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
 		-webkit-text-fill-color:${({ theme }) => theme.text};
 	}
 `;
@@ -204,6 +205,7 @@ export const CustomCardContent = styled(CardContent)`
     grid-column-gap:2.4rem;
 
     @media screen and (max-width: 768px) {
+		grid-template-columns: 1fr;
     }
 `;
 

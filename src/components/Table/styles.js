@@ -28,4 +28,17 @@ export const StyledDataGrid = styled(DataGrid)`
             color: ${({ theme }) => theme.text};
             }
 
+            & .MuiDataGrid-selectedRowCount{
+            color: ${({ theme }) => theme.text};
+            }
+
+            & .MuiCheckbox-root.Mui-checked{
+            color: ${({ theme }) => theme.text};
+            }
+            
+            /* & .MuiButtonBase-root.MuiIconButton-root.Mui-disabled{
+            color: ${({ theme }) => theme.text};
+            }
+             */
+
 `;

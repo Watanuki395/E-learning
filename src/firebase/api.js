@@ -12,8 +12,8 @@ import {
 
   const collectionName = "users";
 
-export const saveUsers = (newLink) =>
-  addDoc(collection(db, collectionName), newLink);
+export const saveUsers = (newUser) =>
+  addDoc(collection(db, collectionName), newUser);
 
 export const updateUser = (id, updatedFields) =>
   updateDoc(doc(db, collectionName, id), updatedFields);
@@ -28,3 +28,6 @@ export const getUsers = () => getDocs(collection(db, collectionName));
 export const deleteUser = (id) => deleteDoc(doc(db, collectionName, id));
 
 export const getUser = (id) => getDoc(doc(db, collectionName, id));
+
+
+export const saveNewBlog = (newBlog) => addDoc(collection(db, 'blogs'), newBlog);

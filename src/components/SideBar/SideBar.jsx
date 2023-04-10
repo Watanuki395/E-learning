@@ -115,9 +115,9 @@
             notification: 0,
         },
         {
-            label: "Menú",
+            label: "Contenido",
             icon: <MdOutlineAnalytics />,
-            to: "/menu",
+            to: "/content",
             notification: 0,
         },
         {

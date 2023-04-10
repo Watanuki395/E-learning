@@ -16,6 +16,8 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Dashboard } from "./pages/Admin/Dashboard";
 import Profile from "./pages/Profile/Profile";
+import Content from "./pages/Content/Content";
+import ContentAdd from "./pages/Content/ContentAdd";
 import Missing from "./components/Missing/Missing";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -45,6 +47,8 @@ function App() {
 				<Route element={<ProtectedRoute />}>
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/content" element={<Content />} />
+					<Route path="/content-add" element={<ContentAdd />} />
 					{/* <Route path="/menu" element={<MenuPage title="Lista de Categorias"/>} />
 							<Route path='/new/product' element={<NewProductPage title="Añadir Nuevo Producto"/>} />
 							<Route path='/CategoryByProduct/:id_cat' element={<CategoryByProductPage/>} />

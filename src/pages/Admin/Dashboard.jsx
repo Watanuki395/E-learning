@@ -145,6 +145,7 @@ export function Dashboard() {
                                                     rows={rows} 
                                                     checkboxSelection={false}
                                                     pageSize={5}
+                                                    toolBar={true}
                                                     />
                                             </DataTableWrapper>
                                             }
